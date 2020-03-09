@@ -178,7 +178,11 @@ function get_author() {
 # 输出所有日志
 ###
 function all_log() {
-    echo "# Changelog" >> "$_OUTPUT"
+    if [[ -n "$_OUTPUT" ]]; then
+        echo "# Changelog" >> "$_OUTPUT"
+    else
+        echo "# Changelog"
+    fi
     if [[ -n "$_CURRENT_TAG" ]]; then
         set_tag "$_CURRENT_TAG"
         simple_log

@@ -87,7 +87,13 @@ git ci
 
 提供项目的`CHANGELOG`输出，支持输出到终端或指定文件中，可以使用`git clog -h`来查看帮助信息。
 
-输出的格式大致如下，符合`Markdown`语法([查看样例](CHANGELOG.md))：
+如果要使用该特性务必需要把 tag 写成`项目名称-tag`形式
+
+```
+git clog -o ./changelog.md -v "项目名称-tag"
+```
+
+输出的格式大致如下，符合`Markdown`语法([查看样例](changelog_new.md))：
 
 ```
 # tag
