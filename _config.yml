@@ -2,7 +2,7 @@ title: Git-toolkit
 description: Git工具箱
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-slate
+theme: jekyll-theme-tactile
 
 gems:
   - jekyll-mentions
