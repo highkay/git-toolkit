@@ -1,25 +1,41 @@
 # Git Toolkit
 
-
 > 人类懒惰的本性和不满足的本性是驱使科技发展的源泉......
+
+<!-- TOC -->
+
+- [Git Toolkit](#git-toolkit)
+  - [安装](#安装)
+  - [git toolkit 介绍](#git-toolkit-介绍)
+    - [自定义命令](#自定义命令)
+      - [git toolkit](#git-toolkit)
+      - [git ci](#git-ci)
+      - [git clog](#git-clog)
+    - [Hook 脚本](#hook-脚本)
+      - [commit-msg](#commit-msg)
+    - [配置](#配置)
+      - [git config --global commit.template](#git-config---global-committemplate)
+      - [git config --global core.hooksPath](#git-config---global-corehookspath)
+
+<!-- /TOC -->
 
 ## 安装
 
-**使用curl**
+**使用 curl**
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tonydeng/git-toolkit/master/installer.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/highkay/git-toolkit/master/installer.sh)"
 ```
 
-**使用wget**
+**使用 wget**
 
 ```bash
-bash -c "$(wget https://raw.githubusercontent.com/tonydeng/git-toolkit/master/installer.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/highkay/git-toolkit/master/installer.sh -O -)"
 ```
 
-## git toolkit介绍
+## git toolkit 介绍
 
-本工具集包含几个部分，自定义命令，Hook脚本，以及配置模板
+本工具集包含几个部分，自定义命令，Hook 脚本，以及配置模板
 
 ### 自定义命令
 
@@ -55,16 +71,17 @@ git toolkit update
 git ci
 
 选择您正在提交的类型:
-        1. feat: 新功能（ Introducing new features ）
-        2. fix: 修补bug ( Fixing a bug )
-        3. docs: 文档（ Writing docs ）
-        4. style: 格式（ Improving structure / format of the code ）
-        5. refactor: 重构（ Refactoring code ）
-        6. test: 增加测试 ( Adding tests )
-        7. chore: 构建过程或辅助工具的变动 ( Changing configuration files. )
-        8. perf:  改善性能 ( Improving performance )
+        1. Add: 新增一个项目 e.g. 功能, 测试, 依赖
+        2. Drop: 移除一个项目 e.g. 功能, 测试, 依赖
+        3. Fix: 修复一个问题 e.g. bug, 文本, 事故, 误报.
+        4. Document: 只包含文档的变更, e.g. 帮助文件.
+        5. Refactor: 只有重构的变更.
+        6. Bump: 增加某项目的版本 e.g. a 依赖.
+        7. Make: 变更构建流程，工具或者设施.
+        8. Optimize: 只包含性能优化的变更, e.g. 提高代码运行速度.
+        9. Reformat: 只有格式样式的变更, e.g. 变更空格.
         0. quit: 退出 ( Exit )
-```    
+```
 
 #### git clog
 
@@ -85,7 +102,7 @@ git ci
 
 ![git-toolkit changelog](changelog.jpg)
 
-### Hook脚本
+### Hook 脚本
 
 #### commit-msg
 
@@ -97,6 +114,8 @@ git ci
 
 配置统一的`commit message`模板
 
+参考`https://github.com/joelparkerhenderson/git_commit_message`进行一些裁剪
+
 #### git config --global core.hooksPath
 
-配置制定的Hook脚本的目录，使用本项目的git hook脚本
+配置制定的 Hook 脚本的目录，使用本项目的 git hook 脚本

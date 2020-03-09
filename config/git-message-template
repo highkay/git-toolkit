@@ -5,21 +5,22 @@ type(<scope>): <subject>
 <footer>
 
 # type 字段包含:
-#   feat: 新功能（ Introducing new features ）
-#   fix: 修补bug ( Fixing a bug )
-#   docs: 文档（ Writing docs ）
-#   style: 格式（ Improving structure / format of the code ）
-#   refactor: 重构（ Refactoring code ）
-#   test: 增加测试 ( Adding tests )
-#   chore: 构建过程或辅助工具的变动 ( Changing configuration files. )
-#   perf:  改善性能 ( Improving performance )
+    Add: 新增一个项目 e.g. 功能, 测试, 依赖
+    Drop: 移除一个项目 e.g. 功能, 测试, 依赖
+    Fix: 修复一个问题 e.g. bug, 文本, 事故, 误报.
+    Document: 只包含文档的变更, e.g. 帮助文件.
+    Refactor: 只有重构的变更.
+    Bump: 增加某项目的版本 e.g. a 依赖.
+    Make: 变更构建流程，工具或者设施.
+    Optimize: 只包含性能优化的变更, e.g. 提高代码运行速度.
+    Reformat: 只有格式样式的变更, e.g. 变更空格.
 
-# scope 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等。
+# scope 用于说明 commit 影响的版本。
 # subject 是 commit 目的的简短描述，不超过50个字符
 # body 部分是对本次 commit 的详细描述，可以分成多行
 # footer 用来关闭 Issue或以Backlog开头，后面是对变动的描述、以及变动理由和迁移方法
 
 # 英文版详细例子，请看这里
-# https://github.com/sparkbox/how_to/tree/master/style/git
+# https://github.com/joelparkerhenderson/git_commit_message
 # 中文版介绍，请看这里
 # http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html

@@ -5,7 +5,7 @@ function init() {
     for l in "${LOCALE[@]}" ; do
         export "$l=$LANGUAGE"
     done
-    TYPE=(":sparkles: feat" ":bug: fix" ":memo: docs" ":art: style" ":hammer: refactor" ":white_check_mark: test" ":wrench: chore" ":zap: perf")
+    TYPE=(":tada: Add" ":fire: Drop" ":bug: Fix" ":memo: Document" ":hammer: Refactor" ":arrow_up: Bump" ":wrench: Make" ":racehorse: Optimize" ":art: Reformat")
 }
 
 # 验证当前是否为Git项目
@@ -17,22 +17,25 @@ function verify {
       exit $GIT_VERIFY
     fi
 }
+
+
 # 消息主体
 function mainMessage() {
     echo "选择您正在提交的类型:
-        1. feat: 新功能（ Introducing new features ）
-        2. fix: 修补bug ( Fixing a bug )
-        3. docs: 文档（ Writing docs ）
-        4. style: 格式（ Improving structure / format of the code ）
-        5. refactor: 重构（ Refactoring code ）
-        6. test: 增加测试 ( Adding tests )
-        7. chore: 构建过程或辅助工具的变动 ( Changing configuration files. )
-        8. perf:  改善性能 ( Improving performance )
+        1. Add: 新增一个项目 e.g. 功能, 测试, 依赖
+        2. Drop: 移除一个项目 e.g. 功能, 测试, 依赖
+        3. Fix: 修复一个问题 e.g. bug, 文本, 事故, 误报.
+        4. Document: 只包含文档的变更, e.g. 帮助文件.
+        5. Refactor: 只有重构的变更.
+        6. Bump: 增加某项目的版本 e.g. a 依赖.
+        7. Make: 变更构建流程，工具或者设施.
+        8. Optimize: 只包含性能优化的变更, e.g. 提高代码运行速度.
+        9. Reformat: 只有格式样式的变更, e.g. 变更空格.
         0. quit: 退出 ( Exit )
     "
-    read -e -n 1 -p "请选择相关数字选项 [0-8]> "
+    read -e -n 1 -p "请选择相关数字选项 [0-9]> "
 
-    if [[ $REPLY =~ ^[0-8]$ ]]; then
+    if [[ $REPLY =~ ^[0-9]$ ]]; then
         if [[ $REPLY == 0 ]]; then
             echo "退出本次提交"
             exit
@@ -42,7 +45,9 @@ function mainMessage() {
         echo "无效的输入" >&2
         exit 1
     fi
-    echo '本次提交的范围，建议填写版本号 ($version):'
+    # git fetch --tags --quiet
+    VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
+    echo "本次提交的范围，建议填写版本号 (最近版本"${VERSION}"):"
     read -e scope
     echo "请添加简短的，必要的对本次提交的描述:"
     read -e subject
