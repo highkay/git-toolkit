@@ -16,6 +16,8 @@
     - [配置](#配置)
       - [git config --global commit.template](#git-config---global-committemplate)
       - [git config --global core.hooksPath](#git-config---global-corehookspath)
+  - [Q&A](#qa)
+    - [linux 上提示缺失 zh_CN.UTF-8 的 LC 问题](#linux-上提示缺失-zh_cnutf-8-的-lc-问题)
 
 <!-- /TOC -->
 
@@ -125,3 +127,24 @@ git clog -o ./changelog.md -v "项目名称-tag"
 #### git config --global core.hooksPath
 
 配置制定的 Hook 脚本的目录，使用本项目的 git hook 脚本
+
+## Q&A
+
+### linux 上提示缺失 zh_CN.UTF-8 的 LC 问题
+
+```
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_COLLATE: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_CTYPE: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_MESSAGES: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_NUMERIC: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_TIME: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_ALL: cannot change locale (zh_CN.UTF-8)
+```
+
+运行
+
+```
+sudo locale-gen "zh_CN.UTF-8"
+```
+
+生成对应的 Locale 即可
