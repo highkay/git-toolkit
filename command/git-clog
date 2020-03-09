@@ -178,6 +178,7 @@ function get_author() {
 # 输出所有日志
 ###
 function all_log() {
+    echo "# Changelog" >> "$_OUTPUT"
     if [[ -n "$_CURRENT_TAG" ]]; then
         set_tag "$_CURRENT_TAG"
         simple_log
@@ -195,11 +196,11 @@ function all_log() {
 function simple_log() {
     get_all_author
     if [[ -n "$_OUTPUT" ]]; then
-        echo "# ${CURRENT_TAG[2]}" >> "$_OUTPUT"
+        echo "## ${CURRENT_TAG[2]}" >> "$_OUTPUT"
         echo "" >> "$_OUTPUT"
         echo "" >> "$_OUTPUT"
     else
-        echo "# ${CURRENT_TAG[2]}"
+        echo "## ${CURRENT_TAG[2]}"
         echo ""
         echo ""
     fi
@@ -209,7 +210,7 @@ function simple_log() {
         _author_output=`echo "$a"|awk -F '[<>]' '{print "["$1"]("$2")"$3}'`
         _cmd="git log --author='${_author}' --no-merges $VERSION_PARAMETERS --pretty=format:'* %s (%ad) [view commit %h](${REMOTE_URL[*]}/commit/%h)  ' --date=format:'%Y-%m-%d %H:%M:%S'"
         if [[ -n "$_OUTPUT" ]]; then
-            echo "#### $_author_output" >> "$_OUTPUT"
+            echo "### $_author_output" >> "$_OUTPUT"
             echo "" >> "$_OUTPUT"
             _cmd="$_cmd >> $_OUTPUT"
             # echo $"$_cmd"
@@ -217,7 +218,7 @@ function simple_log() {
             echo "" >> "$_OUTPUT"
             echo "" >> "$_OUTPUT"
         else
-            echo "#### $_author_output"
+            echo "### $_author_output"
             echo ""
             # echo $"$_cmd"
             eval "$_cmd"
