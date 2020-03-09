@@ -205,8 +205,8 @@ function simple_log() {
     fi
 
     for a in "${AUTHORS[@]}"; do
-        _author=`echo "$a"|awk -F '[<\>]' '{print $2}'`
-        _author_output=`echo "$a"|awk -F '[<\>]' '{print "["$1"]("$2")"$3}'`
+        _author=`echo "$a"|awk -F '[<>]' '{print $2}'`
+        _author_output=`echo "$a"|awk -F '[<>]' '{print "["$1"]("$2")"$3}'`
         _cmd="git log --author='${_author}' --no-merges $VERSION_PARAMETERS --pretty=format:'* %s (%ad) [view commit %h](${REMOTE_URL[*]}/commit/%h)  ' --date=format:'%Y-%m-%d %H:%M:%S'"
         if [[ -n "$_OUTPUT" ]]; then
             echo "#### $_author_output" >> "$_OUTPUT"
