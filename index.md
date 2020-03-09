@@ -1,25 +1,43 @@
 # Git Toolkit
 
-
 > 人类懒惰的本性和不满足的本性是驱使科技发展的源泉......
+
+<!-- TOC -->
+
+- [Git Toolkit](#git-toolkit)
+  - [安装](#安装)
+  - [git toolkit 介绍](#git-toolkit-介绍)
+    - [自定义命令](#自定义命令)
+      - [git toolkit](#git-toolkit)
+      - [git ci](#git-ci)
+      - [git clog](#git-clog)
+    - [Hook 脚本](#hook-脚本)
+      - [commit-msg](#commit-msg)
+    - [配置](#配置)
+      - [git config --global commit.template](#git-config---global-committemplate)
+      - [git config --global core.hooksPath](#git-config---global-corehookspath)
+  - [Q&A](#qa)
+    - [linux 上提示缺失 zh_CN.UTF-8 的 LC 问题](#linux-上提示缺失-zh_cnutf-8-的-lc-问题)
+
+<!-- /TOC -->
 
 ## 安装
 
-**使用curl**
+**使用 curl**
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tonydeng/git-toolkit/master/installer.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/highkay/git-toolkit/master/installer.sh)"
 ```
 
-**使用wget**
+**使用 wget**
 
 ```bash
-bash -c "$(wget https://raw.githubusercontent.com/tonydeng/git-toolkit/master/installer.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/highkay/git-toolkit/master/installer.sh -O -)"
 ```
 
-## git toolkit介绍
+## git toolkit 介绍
 
-本工具集包含几个部分，自定义命令，Hook脚本，以及配置模板
+本工具集包含几个部分，自定义命令，Hook 脚本，以及配置模板
 
 ### 自定义命令
 
@@ -53,19 +71,46 @@ git toolkit update
 
 ```bash
 git ci
-选择您正在提交的类型:
-        1. backlog: 开始一个新的backlog
-        2. feat: 新功能（feature）
-        3. fix: 修补bug
-        4. docs: 文档（documentation）
-        5. style: 格式（不影响代码运行的变动）
-        6. refactor: 重构（即不是新增功能，也不是修改bug的代码变动）
-        7. test: 增加测试
-        8. chore: 构建过程或辅助工具的变动
-        0. quit: 退出
-```    
 
-### Hook脚本
+选择您正在提交的类型:
+        1. Add: 新增一个项目 e.g. 功能, 测试, 依赖
+        2. Drop: 移除一个项目 e.g. 功能, 测试, 依赖
+        3. Fix: 修复一个问题 e.g. bug, 文本, 事故, 误报.
+        4. Document: 只包含文档的变更, e.g. 帮助文件.
+        5. Refactor: 只有重构的变更.
+        6. Bump: 增加某项目的版本 e.g. a 依赖.
+        7. Make: 变更构建流程，工具或者设施.
+        8. Optimize: 只包含性能优化的变更, e.g. 提高代码运行速度.
+        9. Reformat: 只有格式样式的变更, e.g. 变更空格.
+        0. quit: 退出 ( Exit )
+```
+
+#### git clog
+
+提供项目的`CHANGELOG`输出，支持输出到终端或指定文件中，可以使用`git clog -h`来查看帮助信息。
+
+如果要使用该特性务必需要把 tag 写成`项目名称-tag`形式
+
+```
+git clog -o ./changelog.md -v "项目名称-tag"
+```
+
+输出的格式大致如下，符合`Markdown`语法([查看样例](changelog_new.md))：
+
+```
+# tag
+
+#### [author](mailto:email) (commit_count)
+
+* commit message (commit date) [commit_short_sha1](commit_url)
+* commit message (commit date) [commit_short_sha1](commit_url)
+```
+
+显示效果如下：
+
+![git-toolkit changelog](changelog.jpg)
+
+### Hook 脚本
 
 #### commit-msg
 
@@ -77,6 +122,29 @@ git ci
 
 配置统一的`commit message`模板
 
+参考`https://github.com/joelparkerhenderson/git_commit_message`进行一些裁剪
+
 #### git config --global core.hooksPath
 
-配置制定的Hook脚本的目录，使用本项目的git hook脚本
+配置制定的 Hook 脚本的目录，使用本项目的 git hook 脚本
+
+## Q&A
+
+### linux 上提示缺失 zh_CN.UTF-8 的 LC 问题
+
+```
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_COLLATE: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_CTYPE: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_MESSAGES: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_NUMERIC: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_TIME: cannot change locale (zh_CN.UTF-8): No such file or directory
+/usr/local/bin/git-ci: line 6: warning: setlocale: LC_ALL: cannot change locale (zh_CN.UTF-8)
+```
+
+运行
+
+```
+sudo locale-gen "zh_CN.UTF-8"
+```
+
+生成对应的 Locale 即可
